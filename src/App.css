@@ -1,0 +1,22 @@
+@keyframes fade-float {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+  }
+  30% {
+    opacity: 0.4;
+    transform: translateY(-10px) scale(1);
+  }
+  70% {
+    opacity: 0.6;
+    transform: translateY(-30px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.9);
+  }
+}
+
+.animate-fade-float {
+  animation: fade-float 4s ease-in-out infinite;
+}
