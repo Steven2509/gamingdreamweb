@@ -1,15 +1,25 @@
 import { motion } from "framer-motion";
 import { useEffect } from "react";
 
+import thien from "../assets/thien.jpg";
+import thai from "../assets/thai.jpg";
+import duy from "../assets/duy.jpg";
+import phuc from "../assets/phuc.jpg";
+import phu from "../assets/phu.jpg";
+import chau from "../assets/chau.jpg";
+import minh from "../assets/minh.jpg";
+import nghi from "../assets/nghi.png";
+
+
 const members = [
-  { name: "Thiện Sigma", caption: "Sigma PTNK", image: "src/assets/Thien.jpg" },
-  { name: "Thái", caption: "24", image: "/assets/member2.jpg" },
-  { name: "Duy", caption: "Chuyên Toán top 1 Grow A Garden", image: "/assets/member3.jpg" },
-  { name: "Phúc", caption: "...", image: "/assets/member4.jpg" },
-  { name: "Phú", caption: "Sigma", image: "src/assets/phu.jpg" },
-  { name: "Châu", caption: "...", image: "src/assets/chau.jpg" },
-  { name: "Gia Minh", caption: "Lọ Vương", image: "/assets/member7.jpg" },
-  { name: "Nghi", caption: "OFFLINE 24/24", image: "/assets/member8.jpg" },
+  { name: "Thiện Sigma", caption: "Sigma PTNK", image: thien },
+  { name: "Thái", caption: "24", image: thai },
+  { name: "Duy", caption: "Chuyên Toán top 1 Grow A Garden", image: duy },
+  { name: "Phúc", caption: "...", image: phuc },
+  { name: "Phú", caption: "Sigma", image: phu },
+  { name: "Châu", caption: "...", image: chau },
+  { name: "Gia Minh", caption: "Lọ Vương", image: minh },
+  { name: "Nghi", caption: "OFFLINE 24/24", image: nghi },
 ];
 
 const TeamPage = () => {
