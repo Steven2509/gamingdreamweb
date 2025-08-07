@@ -1,29 +1,86 @@
 import { useState } from "react";
 import bridge from "../assets/coolroblox.jpg";
+import { supabase } from "../supabase";
 
-interface HeroProps {
-  onUpload: (memory: { image: string; caption: string; time: string }) => void;
+const publicKey = "public_OMNI0lJ4dWzo7Fs3eaFZM3PbcDw=";
+const privateKey = "private_4RU27qAH2MNxmiCMaAxcI3zV9Es=";
+const uploadUrl = "https://upload.imagekit.io/api/v1/files/upload";
+
+const Hero = ({
+  isLoggedIn,
+  onUploaded,
+}: {
   isLoggedIn: boolean;
-}
-
-
-const Hero = ({ onUpload, isLoggedIn }: HeroProps) => {
+  onUploaded: () => void;
+}) => {
   const [image, setImage] = useState<File | null>(null);
   const [caption, setCaption] = useState("");
+  const [uploading, setUploading] = useState(false);
 
-  const handleUpload = () => {
-    if (image && caption && isLoggedIn) {
-      const url = URL.createObjectURL(image);
-      const time = new Date().toLocaleString("vi-VN"); // Giờ Việt Nam
-      onUpload({ image: url, caption, time }); // Truyền lên
-      setImage(null);
-      setCaption("");
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleUpload = async () => {
+    if (!image || !caption || !isLoggedIn) return;
+    setUploading(true);
+
+    try {
+      const base64 = await fileToBase64(image);
+
+      const formData = new FormData();
+      formData.append("file", base64);
+      formData.append("fileName", image.name);
+      formData.append("publicKey", publicKey);
+      formData.append("useUniqueFileName", "true");
+
+      const authString = btoa(`${privateKey}:`);
+      const res = await fetch(uploadUrl, {
+        method: "POST",
+        headers: {
+          Authorization: `Basic ${authString}`,
+        },
+        body: formData,
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        const imageUrl = data.url;
+        const now = new Date();
+
+        const { error } = await supabase.from("memories").insert([
+          {
+            image_url: imageUrl,
+            caption: caption,
+            created_at: now.toISOString(),
+          },
+        ]);
+
+        if (error) {
+          console.error("Lỗi khi lưu vào Supabase:", error);
+        } else {
+          setImage(null);
+          setCaption("");
+          onUploaded(); // 🔥 Gọi lại App để refetch memories
+        }
+      } else {
+        console.error("Upload thất bại:", data);
+      }
+    } catch (err) {
+      console.error("Lỗi khi upload:", err);
+    } finally {
+      setUploading(false);
     }
   };
 
   return (
     <section className="w-screen h-[50vh] overflow-hidden bg-transparent flex items-start justify-center pb-32">
-      {/* Background image */}
       <div
         className="absolute top-0 left-0 w-full h-[50vh] overflow-hidden z-0"
         style={{
@@ -34,7 +91,6 @@ const Hero = ({ onUpload, isLoggedIn }: HeroProps) => {
         <img src={bridge} alt="Hero" className="w-full h-[50vh] object-cover" />
       </div>
 
-      {/* Upload Form */}
       <div className="absolute top-[45vh] left-1/2 transform -translate-x-1/2 p-1 rounded-xl bg-gradient-to-b from-sky-400 to-purple-300 z-10 w-[90%] max-w-xl shadow-lg">
         <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-xl p-6 text-center">
           <h2 className="text-4xl font-extrabold text-black mb-2 tracking-tight">
@@ -44,7 +100,6 @@ const Hero = ({ onUpload, isLoggedIn }: HeroProps) => {
             Nơi những Sigma hội tụ
           </p>
 
-          {/* Caption input */}
           <input
             type="text"
             placeholder="Caption của bạn..."
@@ -54,7 +109,6 @@ const Hero = ({ onUpload, isLoggedIn }: HeroProps) => {
             disabled={!isLoggedIn}
           />
 
-          {/* File Input */}
           <div className="w-full mb-4">
             <div className="flex items-center space-x-3">
               <button
@@ -83,13 +137,12 @@ const Hero = ({ onUpload, isLoggedIn }: HeroProps) => {
             />
           </div>
 
-          {/* Upload Button */}
           <button
             onClick={handleUpload}
-            disabled={!image || !caption || !isLoggedIn}
+            disabled={!image || !caption || !isLoggedIn || uploading}
             className="bg-blue-500 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md transition duration-300 shadow disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Upload
+            {uploading ? "Uploading..." : "Upload"}
           </button>
         </div>
       </div>

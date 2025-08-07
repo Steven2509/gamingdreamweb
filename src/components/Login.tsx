@@ -39,7 +39,7 @@ const Login = ({ setIsLoggedIn }: LoginProps) => {
         onSubmit={handleSubmit}
         className="bg-white bg-opacity-10 backdrop-blur-md p-8 rounded-lg shadow-lg w-full max-w-md space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center">Đăng nhập</h2>
+        <h2 className="text-2xl font-bold text-center text-black">Đăng nhập</h2>
 
         {error && <p className="text-red-400 text-center">{error}</p>}
 

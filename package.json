@@ -2,7 +2,6 @@
   "name": "gameweb",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -10,9 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.53.0",
     "@tailwindcss/vite": "^4.1.11",
+    "axios": "^1.11.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "framer-motion": "^12.23.12",
+    "imagekit": "^6.0.0",
+    "imagekit-javascript": "^4.0.1",
+    "imagekitio-react": "^4.3.0",
     "lucide-react": "^0.536.0",
+    "multer": "^2.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.7.1",

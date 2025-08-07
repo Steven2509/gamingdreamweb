@@ -5,7 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const navItems = ["Thành Tựu", "Gameplay", "Meme", "Ảnh"];
+
+  const navItems = [
+    { name: "Thành Viên", to: "/team" }, // dùng route
+    { name: "Gameplay", to: "/gameplay" },
+    { name: "Thành Tựu", to: "#thanhtuu" },
+  ];
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
@@ -21,15 +26,25 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
 
       {/* Desktop menu */}
       <nav className="hidden md:flex space-x-4">
-        {navItems.map((item) => (
-          <a
-            key={item}
-            href={`#${item.toLowerCase().replace(/\s/g, "")}`}
-            className="px-3 py-1 rounded-md hover:bg-green-100 hover:bg-opacity-40 active:bg-green-300 active:bg-opacity-70 transition-all duration-200"
-          >
-            {item}
-          </a>
-        ))}
+        {navItems.map((item) =>
+          item.to.startsWith("/") ? (
+            <Link
+              key={item.name}
+              to={item.to}
+              className="px-3 py-1 rounded-md hover:bg-green-100 hover:bg-opacity-40 active:bg-green-300 active:bg-opacity-70 transition-all duration-200"
+            >
+              {item.name}
+            </Link>
+          ) : (
+            <a
+              key={item.name}
+              href={item.to}
+              className="px-3 py-1 rounded-md hover:bg-green-100 hover:bg-opacity-40 active:bg-green-300 active:bg-opacity-70 transition-all duration-200"
+            >
+              {item.name}
+            </a>
+          )
+        )}
         {!isLoggedIn && (
           <Link
             to="/login"
@@ -58,16 +73,27 @@ const Header = ({ isLoggedIn }: { isLoggedIn: boolean }) => {
             transition={{ duration: 0.3 }}
             className="absolute top-full left-0 w-full bg-black bg-opacity-90 backdrop-blur-md text-white flex flex-col items-center space-y-4 py-6 md:hidden z-40"
           >
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s/g, "")}`}
-                className="text-base hover:text-green-300 transition"
-                onClick={() => setMenuOpen(false)}
-              >
-                {item}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              item.to.startsWith("/") ? (
+                <Link
+                  key={item.name}
+                  to={item.to}
+                  className="text-base hover:text-green-300 transition"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.to}
+                  className="text-base hover:text-green-300 transition"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
+              )
+            )}
             {!isLoggedIn && (
               <Link
                 to="/login"
