@@ -1,69 +1,57 @@
-# React + TypeScript + Vite
+# 🕹️ Gaming Dream - Memory & Achievement Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Chào mừng bạn đến với **Gaming Dream** — trang web chính thức của anh em trong nhóm, nơi **lưu giữ kỷ niệm** và **vinh danh những thành tích** mà anh em đã cùng nhau tạo dựng qua từng trận đấu, từng video, từng khoảnh khắc.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Giới thiệu
 
-## Expanding the ESLint configuration
+**Gaming Dream** không chỉ là một website, mà là một **hành trình được lưu trữ** — nơi tất cả anh em trong nhóm có thể:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- 📷 **Tải lên hình ảnh & caption** ghi lại những kỷ niệm đáng nhớ.
+- 🎮 **Xem lại video gameplay** highlight, tập luyện hoặc chiến đấu.
+- 🌟 **Xem lại những thành tựu** và spotlight của từng thành viên.
+- 🧑‍🤝‍🧑 **Xem thông tin về các thành viên** trong đội.
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## ⚙️ Tính năng nổi bật
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- ✅ Đăng nhập bảo mật (chỉ dành cho thành viên)
+- 📁 Upload ảnh và caption, lưu vào cloud (ImageKit) và database (Supabase)
+- 💾 Tự động hiển thị ảnh kỷ niệm trong thư viện
+- 🎥 Xem các video gameplay trực tiếp từ YouTube
+- 🎨 Giao diện hiện đại, hiệu ứng mượt mà với Tailwind CSS + Framer Motion
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🛠️ Công nghệ sử dụng
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- **Frontend**: React + TypeScript
+- **UI Framework**: Tailwind CSS + Framer Motion
+- **Cloud Storage**: [ImageKit.io](https://imagekit.io/)
+- **Database**: [Supabase](https://supabase.com/)
+- **Routing**: React Router DOM
+
+---
+
+## 👥 Thành viên nhóm
+
+Dự án được xây dựng bởi **anh em nhóm Gaming Dream**, mỗi người đều góp phần tạo nên một **kho lưu trữ sống động** và **ý nghĩa** cho tập thể.
+
+---
+
+## 💡 Mục tiêu
+
+> Tạo ra một không gian để **ghi nhớ**, **tôn vinh**, và **truyền cảm hứng** cho các thế hệ anh em sau này — dù thắng hay thua, điều quan trọng là chúng ta đã **cùng nhau chiến đấu**.
+
+---
+
+## 🚀 Truy cập web
+
+> Web hoạt động tốt trên cả máy tính và điện thoại.  
+> Chỉ thành viên đăng nhập mới có quyền đăng ảnh.
+
+---
+
+Nếu bạn là thành viên của nhóm, hãy đăng nhập và **cùng nhau lưu giữ kỷ niệm**!
